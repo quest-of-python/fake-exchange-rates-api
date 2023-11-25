@@ -115,13 +115,10 @@ func main() {
 		},
 	},
 	}
-	port := os.Getenv("EXCHANGE_RATE_API_PORT")
-	if port == "" {
-		port = ":8000"
-	}
+	port := os.Getenv("API_PORT")
 	http.HandleFunc("/api/v1/historical_rates", app.GetHistoricalRate)
 	fmt.Printf("Starting Exchange Rates API on port %s\n", port)
-	if err := http.ListenAndServe(port, nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil); err != nil {
 		log.Fatal(err)
 	}
 }
