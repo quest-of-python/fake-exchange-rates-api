@@ -39,10 +39,6 @@ class HistoricalRateResponse(BaseModel):
     rate: Optional[float] = None
 
 
-class AppSettings(BaseModel):
-    api_port: Optional[int] = 9000
-
-
 @app.get("/api/v1/historical_rates")
 async def historical_rates(
     for_date: date, base_currency: BaseCurrency, currency: Currency
@@ -67,5 +63,4 @@ async def historical_rates(
 
 
 if __name__ == "__main__":
-    settings = AppSettings(api_port=os.getenv("API_PORT"))
-    uvicorn.run(app, host="0.0.0.0", port=settings.api_port)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
