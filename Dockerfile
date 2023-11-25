@@ -1,9 +1,9 @@
-FROM golang:1.21
+FROM python:3.12
 
 WORKDIR /app
 
-COPY go.mod *.go ./
+COPY requirements.txt ./
 
-RUN CGO_ENABLED=0 go build -o /exchange-rates-api
+RUN pip install -r requirements.txt
 
-CMD ["/exchange-rates-api"]
+COPY main.py ./

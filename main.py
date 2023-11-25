@@ -1,4 +1,6 @@
 import os
+import random
+import time
 from enum import Enum
 from typing import Optional
 
@@ -37,10 +39,15 @@ class HistoricalRateResponse(BaseModel):
     rate: Optional[float] = None
 
 
+class AppSettings(BaseModel):
+    api_port: Optional[int] = 9000
+
+
 @app.get("/api/v1/historical_rates")
 async def historical_rates(
     for_date: date, base_currency: BaseCurrency, currency: Currency
 ):
+    time.sleep(random.randrange(200, 300) / 1000)
     if for_date != date(2023, 9, 25) and currency != base_currency:
         return HistoricalRateResponse(
             for_date=for_date,
@@ -60,5 +67,5 @@ async def historical_rates(
 
 
 if __name__ == "__main__":
-    port = os.getenv("API_PORT", 9000)
-    uvicorn.run(app, port=port)
+    settings = AppSettings(api_port=os.getenv("API_PORT"))
+    uvicorn.run(app, host="0.0.0.0", port=settings.api_port)

@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 
 services:
   rates-api:
@@ -7,3 +7,4 @@ services:
       API_PORT: "9000"
     ports:
       - "9000:9000"
+    command: "python main.py"
