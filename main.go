@@ -12,10 +12,6 @@ import (
 
 const DateFomat = "2006-01-02"
 
-type ErrorResponse struct {
-	message string
-}
-
 type RateResponse struct {
 	Date         string  `json:"date"`
 	BaseCurrency string  `json:"base_currency"`
